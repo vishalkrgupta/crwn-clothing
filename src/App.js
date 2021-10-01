@@ -6,7 +6,7 @@ import HomePage from './Pages/homepage/homepage.component';
 import ShopPage from './Pages/shop/shop.component.jsx';
 import Header from './Components/header/header.component';
 import SignInAndSignUpPage from './Pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import { auth } from './firebase/firebase.utils';
+import { fireauth } from './firebase/firebase.utils';
 
 /* const HatsPage= () => (
   <div>
@@ -14,21 +14,26 @@ import { auth } from './firebase/firebase.utils';
   </div>
 ); */
 
-class App extends React.component {
+class App extends React.Component {
   constructor() {
     super();
-    
+
     this.State = {
       currentUser: null
     }
   }
+  unsubscribeFromAuth = null;
 
-  componentDidMount(){
-    auth.onAuthStateChanged(user=>{
-      this.setState({currentUser:user});
+  componentDidMount() {
+    this.unsubscribeFromAuth = fireauth.onAuthStateChanged(user => {
+      this.setState({ currentUser: user });
 
       console.log(user);
     })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
   }
 
   render() {
