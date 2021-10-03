@@ -19,9 +19,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     // const userRef = firestore.doc('/users/142ffs7deef');
     const userRef = firestore.doc(`users/${userAuth.uid}`);
     const snapRef = await userRef.get();
-    /* console.log(userAuth.uid); 
-      console.log(snapRef);  
-    console.log(snapRef.exists);*/
 
     if (!snapRef.exists) {
         const { displayName, email } = userAuth;
@@ -46,18 +43,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 
 firebase.initializeApp(firebaseConfig);
-
-// const fireauth = getAuth(firebaseConfig);
-// const db = getFireStore(firebaseConfig);
-
-// onAuthStateChanged(fireauth, user => {
-//     if (user!= null){
-//         console.log('logged in');
-//     }else{
-// console.log('No user');
-//         }
-//     }
-// );
 
 export const fireauth = firebase.auth();
 export const firestore = firebase.firestore();
