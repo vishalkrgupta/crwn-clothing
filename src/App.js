@@ -1,15 +1,16 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { fireauth, createUserProfileDocument } from './firebase/firebase.utils';
+
+import { connect } from 'react-redux';
+import { setCurrentUser } from './redux/user/user.actions';
+
 import './App.css';
-
 import HomePage from './Pages/homepage/homepage.component';
-
 import ShopPage from './Pages/shop/shop.component.jsx';
 import Header from './Components/header/header.component';
-import { connect } from 'react-redux';
+
 import SignInAndSignUpPage from './Pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import { fireauth, createUserProfileDocument } from './firebase/firebase.utils';
-import {setCurrentUser} from './redux/user/user.actions' ;
 
 /* const HatsPage= () => (
   <div>
@@ -21,7 +22,8 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const {setCurrentUser} = this.props;
+    const { setCurrentUser } = this.props;
+    
     this.unsubscribeFromAuth = fireauth.onAuthStateChanged(async userAuth => {
       // this.setState({ currentUser: user });
       // console.log(user);
@@ -32,15 +34,10 @@ class App extends React.Component {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapshot => {
-          // console.log('1');
-          setCurrentUser (
-            {
-              currentUser: {
-                id: snapshot.id,
-                ...snapshot.data()
-              }
-            }, () => { console.log(setCurrentUser); }
-          );
+          setCurrentUser({
+              id: snapshot.id,
+              ...snapshot.data()
+            });
         });
       }
       // console.log(setCurrentUser);
@@ -66,8 +63,8 @@ class App extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch=>({
-  setCurrentUser:user=> dispatch(setCurrentUser(user))
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
 export default connect(null, mapDispatchToProps)(App);
