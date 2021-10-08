@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { fireauth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { connect } from 'react-redux';
-import { setCurrentUser } from './redux/user/user.actions';
+
 
 import './App.css';
 import HomePage from './Pages/homepage/homepage.component';
@@ -11,6 +11,7 @@ import ShopPage from './Pages/shop/shop.component.jsx';
 import Header from './Components/header/header.component';
 
 import SignInAndSignUpPage from './Pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import { setCurrentUser } from './redux/user/user.actions';
 
 /* const HatsPage= () => (
   <div>
@@ -40,7 +41,8 @@ class App extends React.Component {
           });
         });
       }
-      // console.log(setCurrentUser);
+      
+      console.log(setCurrentUser);
       setCurrentUser(userAuth);
     });
   }
