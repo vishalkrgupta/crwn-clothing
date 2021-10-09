@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 import './App.css';
 import HomePage from './Pages/homepage/homepage.component';
-import ShopPage from './Pages/shop/shop.component.jsx';
+import ShopPage from './Pages/shop/shop.component';
 import Header from './Components/header/header.component';
 
 import SignInAndSignUpPage from './Pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
@@ -68,7 +68,8 @@ class App extends React.Component {
             }
 
           />
-        </Switch>
+         </Switch>
+        
       </div>
     );
   }
