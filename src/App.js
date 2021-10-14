@@ -12,6 +12,8 @@ import Header from './Components/header/header.component';
 
 import SignInAndSignUpPage from './Pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { setCurrentUser } from './redux/user/user.actions';
+import { SelectCurrentUser } from './redux/user/user.selectors';
+import {createStructuredSelector} from 'reselect';
 
 /* const HatsPage= () => (
   <div>
@@ -75,8 +77,8 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: SelectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
