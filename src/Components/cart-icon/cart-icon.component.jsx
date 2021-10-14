@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
     toggleCartHidden: () => dispatch(toggleCartHidden())
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     console.log('Being called');
     return {
         itemCount: SelectCartItemsCount(state)
